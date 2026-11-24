@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan a Scenario - Guided editorial</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+  .fld { display:block; }
+  .fld > span { display:block; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#595959; margin-bottom:2px; }
+  .fld input[type=text], .fld textarea, .fld select { width:100%; border:0; border-bottom:2px solid #c9c9c4; background:transparent; padding:8px 0; font-size:17px; color:#101010; outline:none; border-radius:0; }
+  .fld input:focus, .fld textarea:focus, .fld select:focus { border-bottom-color:#00afff; box-shadow:0 2px 0 0 #00afff; }
+  .fld textarea { resize:vertical; }
+  .rm { font-size:13px; color:#595959; text-decoration:underline; }
+  .rm:hover { color:#101010; }
+</style>
+</head>
+<body>
+<div id="root" class="min-h-screen bg-white text-[#212121]" style="font-family: Arial, Helvetica, sans-serif;">
+
+  <header class="bg-[#101010]">
+    <div class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-3 px-6 py-4">
+      <a id="brand-home" href="#home" class="text-[17px] font-bold text-white">Food Premises Audit <span class="ml-2 font-normal text-[#00afff]">Sim Scenario Planner</span></a>
+      <nav class="flex flex-wrap gap-x-6 gap-y-1 text-[15px]" aria-label="Main">
+        <a id="nav-home" href="#home" class="border-b-[3px] border-transparent py-1 text-white hover:border-[#00afff]">Home</a>
+        <a id="nav-plan" href="#plan" class="border-b-[3px] border-[#00afff] py-1 font-bold text-white">Plan a Scenario</a>
+        <a id="nav-pilot" href="#pilot" class="border-b-[3px] border-transparent py-1 text-white hover:border-[#00afff]">Pilot Scenario</a>
+        <a id="nav-resources" href="#resources" class="border-b-[3px] border-transparent py-1 text-white hover:border-[#00afff]">Resources</a>
+        <a id="nav-team" href="#team" class="border-b-[3px] border-transparent py-1 text-white hover:border-[#00afff]">Team Guide</a>
+      </nav>
+    </div>
+    <div class="border-t border-white/10">
+      <div class="mx-auto max-w-[1200px] px-6 pb-10 pt-9">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#00afff]">Scenario planning form</p>
+        <h1 class="max-w-[18ch] text-[44px] font-bold leading-[1.05] text-white md:text-[56px]">Plan your audit scenario.</h1>
+        <p class="mt-5 max-w-[60ch] text-lg leading-relaxed text-white/75">Fill in each box in plain language. If you don't know something, write "not sure" and move on. Your answers save in this browser as you type.</p>
+      </div>
+    </div>
+    <div class="h-[6px] bg-[#00afff]"></div>
+  </header>
+
+  <div class="mx-auto grid max-w-[1200px] gap-10 px-6 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">
+
+    <main class="min-w-0">
+
+      <!-- 01 -->
+      <section id="s1" class="grid gap-4 border-b border-[#e3e1dd] pb-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">01</div>
+        <div>
+          <h2 class="text-2xl font-bold">About your scenario</h2>
+          <div class="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-2">
+            <label class="fld"><span>Scenario title</span><input type="text"></label>
+            <label class="fld"><span>Your name and module / course</span><input type="text"></label>
+            <label class="fld"><span>Type of food premises</span><input type="text" placeholder="e.g. spice factory, bakery"></label>
+            <label class="fld"><span>What is the audit looking at?</span><input type="text" placeholder="e.g. pest control, HACCP"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section id="s2" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">02</div>
+        <div>
+          <h2 class="text-2xl font-bold">Learning objectives</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">What should students learn? Complete the sentence: "After this scenario, students will be able to..."</p>
+          <div class="mt-6 space-y-5">
+            <label class="fld"><span class="flex justify-between"><em class="not-italic">Learning objective 1</em><button id="rm-obj-1" type="button" class="rm normal-case tracking-normal">Remove</button></span><input type="text"></label>
+            <label class="fld"><span class="flex justify-between"><em class="not-italic">Learning objective 2</em><button id="rm-obj-2" type="button" class="rm normal-case tracking-normal">Remove</button></span><input type="text"></label>
+            <label class="fld"><span class="flex justify-between"><em class="not-italic">Learning objective 3</em><button id="rm-obj-3" type="button" class="rm normal-case tracking-normal">Remove</button></span><input type="text"></label>
+          </div>
+          <button id="add-obj" type="button" class="mt-6 inline-flex items-center gap-2 text-[15px] font-bold underline decoration-[#00afff] decoration-[3px] underline-offset-4 hover:bg-[#00afff]"><iconify-icon icon="lucide:plus"></iconify-icon>Add another learning objective</button>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section id="s3" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">03</div>
+        <div>
+          <h2 class="text-2xl font-bold">The setting</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">Describe where the student is standing and what they can walk around.</p>
+          <div class="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-2">
+            <label class="fld md:col-span-2"><span>Areas the student can visit</span><input type="text" placeholder="e.g. loading bay, warehouse, packing room"></label>
+            <label class="fld"><span>Is it based on a real place?</span><input type="text" placeholder="Yes (where?) / No, a typical factory"></label>
+            <label class="fld"><span>Time of day and conditions</span><input type="text" placeholder="e.g. daytime, dim storeroom"></label>
+            <label class="fld md:col-span-2"><span>Where does the student start?</span><input type="text"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section id="s4" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">04</div>
+        <div>
+          <h2 class="text-2xl font-bold">What is wrong? The faults to find</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">Aim for around 4 to 8. For each one say where it is, what the student would see, how serious it is, and why it matters.</p>
+
+          <div class="mt-6 rounded-md bg-[#101010] p-5 text-white">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[#00afff]">How serious? BRCGS levels</p>
+            <ul class="grid gap-3 text-[14.5px] md:grid-cols-3">
+              <li><span class="mb-1.5 inline-block rounded-full bg-[#f4b6b6] px-2.5 py-0.5 text-xs font-bold text-[#101010]">Critical</span><br><span class="text-white/80">A failure on food safety or a legal issue (certificate refused or suspended).</span></li>
+              <li><span class="mb-1.5 inline-block rounded-full bg-[#fbd9a6] px-2.5 py-0.5 text-xs font-bold text-[#101010]">Major</span><br><span class="text-white/80">A substantial failure to meet a requirement, or serious doubt about the product.</span></li>
+              <li><span class="mb-1.5 inline-block rounded-full bg-[#fff2b3] px-2.5 py-0.5 text-xs font-bold text-[#101010]">Minor</span><br><span class="text-white/80">A requirement is not fully met but the product is not in doubt.</span></li>
+            </ul>
+            <p class="mt-4 border-t border-white/15 pt-3 text-[13px] leading-relaxed text-white/70"><strong class="text-white">What is BRCGS?</strong> Brand Reputation Compliance Global Standards (formerly the British Retail Consortium Global Standards). A widely used food safety certification scheme where an independent auditor inspects a site and grades problems as critical, major or minor.</p>
+          </div>
+
+          <div class="mt-6 space-y-8">
+            <div class="border-l-[6px] border-[#00afff] pl-5">
+              <div class="mb-4 flex items-center justify-between"><strong class="text-lg">Fault 1</strong><button id="rm-fault-1" type="button" class="rm">Remove</button></div>
+              <div class="grid gap-x-8 gap-y-5 md:grid-cols-2">
+                <label class="fld"><span>Where is it?</span><input type="text"></label>
+                <label class="fld"><span>How serious?</span><select><option>Choose...</option><option>Critical</option><option>Major</option><option>Minor</option></select></label>
+                <label class="fld md:col-span-2"><span>What does the student see?</span><textarea rows="2"></textarea></label>
+                <label class="fld md:col-span-2"><span>Why does it matter? (one or two sentences)</span><textarea rows="2"></textarea></label>
+                <label class="fld"><span>Hint if they are stuck</span><input type="text"></label>
+                <label class="fld"><span>Which record would confirm it?</span><input type="text"></label>
+                <label class="fld md:col-span-2"><span>BRCGS clause number (optional)</span><input type="text"></label>
+              </div>
+            </div>
+            <div class="border-l-[6px] border-[#00afff] pl-5">
+              <div class="mb-4 flex items-center justify-between"><strong class="text-lg">Fault 2</strong><button id="rm-fault-2" type="button" class="rm">Remove</button></div>
+              <div class="grid gap-x-8 gap-y-5 md:grid-cols-2">
+                <label class="fld"><span>Where is it?</span><input type="text"></label>
+                <label class="fld"><span>How serious?</span><select><option>Choose...</option><option>Critical</option><option>Major</option><option>Minor</option></select></label>
+                <label class="fld md:col-span-2"><span>What does the student see?</span><textarea rows="2"></textarea></label>
+                <label class="fld md:col-span-2"><span>Why does it matter? (one or two sentences)</span><textarea rows="2"></textarea></label>
+              </div>
+            </div>
+          </div>
+          <button id="add-fault" type="button" class="mt-8 inline-flex items-center gap-2 text-[15px] font-bold underline decoration-[#00afff] decoration-[3px] underline-offset-4 hover:bg-[#00afff]"><iconify-icon icon="lucide:plus"></iconify-icon>Add another fault</button>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section id="s5" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">05</div>
+        <div>
+          <h2 class="text-2xl font-bold">Records students can look at</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">Paperwork, logs or labels students can open to check what they have found. Say what each one shows.</p>
+          <div class="mt-6 space-y-6">
+            <div class="grid gap-x-6 gap-y-4 border-l-[6px] border-[#e3e1dd] pl-5 md:grid-cols-4"><label class="fld"><span>Record</span><input type="text"></label><label class="fld"><span>Where kept</span><input type="text"></label><label class="fld"><span>What it shows</span><input type="text"></label><label class="fld"><span>Fault number(s)</span><input type="text"></label><button id="rm-rec-1" type="button" class="rm text-left">Remove</button></div>
+            <div class="grid gap-x-6 gap-y-4 border-l-[6px] border-[#e3e1dd] pl-5 md:grid-cols-4"><label class="fld"><span>Record</span><input type="text"></label><label class="fld"><span>Where kept</span><input type="text"></label><label class="fld"><span>What it shows</span><input type="text"></label><label class="fld"><span>Fault number(s)</span><input type="text"></label><button id="rm-rec-2" type="button" class="rm text-left">Remove</button></div>
+          </div>
+          <button id="add-rec" type="button" class="mt-6 inline-flex items-center gap-2 text-[15px] font-bold underline decoration-[#00afff] decoration-[3px] underline-offset-4 hover:bg-[#00afff]"><iconify-icon icon="lucide:plus"></iconify-icon>Add another record</button>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section id="s6" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">06</div>
+        <div>
+          <h2 class="text-2xl font-bold">Assets to build</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">Anything that has to be created: a room, an object, a mark or damage, a document, a person or a sound. <a id="link-resources" href="#resources" class="font-semibold underline decoration-[#00afff] decoration-[3px] underline-offset-2">See the Resources page</a>.</p>
+          <div class="mt-6 border-l-[6px] border-[#e3e1dd] pl-5">
+            <label class="fld"><span>Asset description</span><textarea rows="2"></textarea></label>
+            <div class="mt-5 grid gap-x-6 gap-y-5 md:grid-cols-4">
+              <label class="fld"><span>Type</span><select><option>Choose...</option><option>Room or building</option><option>Object</option><option>Damage or marking</option><option>Document or record</option><option>Person</option><option>Sound</option><option>Other</option></select></label>
+              <label class="fld"><span>Where it appears</span><input type="text"></label>
+              <label class="fld"><span>Fault number(s)</span><input type="text"></label>
+              <label class="fld"><span>Reference material</span><select><option>Choose...</option><option>Have photo</option><option>Have sample</option><option>Need help finding</option><option>Not needed</option></select></label>
+            </div>
+            <label class="fld mt-5"><span>Notes</span><input type="text"></label>
+            <button id="rm-asset-1" type="button" class="rm mt-3">Remove</button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+            <button id="add-asset" type="button" class="inline-flex items-center gap-2 text-[15px] font-bold underline decoration-[#00afff] decoration-[3px] underline-offset-4 hover:bg-[#00afff]"><iconify-icon icon="lucide:plus"></iconify-icon>Add another asset</button>
+            <button id="suggest-assets" type="button" class="inline-flex items-center gap-2 rounded-md bg-[#00afff] px-4 py-2 text-[14px] font-bold text-[#101010] hover:bg-[#101010] hover:text-[#00afff]"><iconify-icon icon="lucide:sparkles"></iconify-icon>Suggest assets from my faults and records</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 -->
+      <section id="s7" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">07</div>
+        <div>
+          <h2 class="text-2xl font-bold">Things that look wrong but are fine <span class="text-base font-normal text-[#595959]">(optional)</span></h2>
+          <p class="mt-1 text-[15px] text-[#595959]">A good example next to a bad one helps students learn to tell the difference.</p>
+          <label class="fld mt-5"><span class="sr-only">Things that look wrong but are fine</span><textarea rows="3"></textarea></label>
+        </div>
+      </section>
+
+      <!-- 08 -->
+      <section id="s8" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">08</div>
+        <div>
+          <h2 class="text-2xl font-bold">What should students do, and how is it marked?</h2>
+          <p class="mb-3 mt-5 text-xs font-bold uppercase tracking-[0.08em] text-[#595959]">Tick what applies</p>
+          <div class="grid gap-x-8 gap-y-2.5 md:grid-cols-2 text-[16px]">
+            <label class="flex items-center gap-3"><input type="checkbox" class="h-5 w-5 accent-[#00afff]">Walk around and spot faults</label>
+            <label class="flex items-center gap-3"><input type="checkbox" class="h-5 w-5 accent-[#00afff]">Mark each fault they find</label>
+            <label class="flex items-center gap-3"><input type="checkbox" class="h-5 w-5 accent-[#00afff]">Choose how serious it is</label>
+            <label class="flex items-center gap-3"><input type="checkbox" class="h-5 w-5 accent-[#00afff]">Open records to back up their finding</label>
+            <label class="flex items-center gap-3 md:col-span-2"><input type="checkbox" class="h-5 w-5 accent-[#00afff]">Write or choose a short explanation of the cause</label>
+          </div>
+          <div class="mt-7 grid gap-x-8 gap-y-6 md:grid-cols-2">
+            <label class="fld md:col-span-2"><span>Anything else students should do</span><input type="text"></label>
+            <label class="fld"><span>What counts as doing well?</span><input type="text" placeholder="e.g. found at least 5 of 6"></label>
+            <label class="fld"><span>Time limit? (yes, how long and why / no)</span><input type="text"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 -->
+      <section id="s9" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">09</div>
+        <div>
+          <h2 class="text-2xl font-bold">What do students see at the end?</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">A summary of what they found and missed, with the "why it matters" text from section 4. Anything else you want included?</p>
+          <label class="fld mt-5"><span class="sr-only">What students see at the end</span><textarea rows="3"></textarea></label>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section id="s10" class="grid gap-4 border-b border-[#e3e1dd] py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#00afff]">10</div>
+        <div>
+          <h2 class="text-2xl font-bold">Anything you are unsure about?</h2>
+          <p class="mt-1 text-[15px] text-[#595959]">Questions for the team, things to check, choices you haven't made.</p>
+          <label class="fld mt-5"><span class="sr-only">Things you are unsure about</span><textarea rows="3"></textarea></label>
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section id="s11" class="grid gap-4 py-10 md:grid-cols-[88px_minmax(0,1fr)]">
+        <div class="text-[44px] font-bold leading-none text-[#c9c9c4]">11</div>
+        <div>
+          <h2 class="text-2xl font-bold">After trying it with students <span class="text-base font-normal text-[#595959]">(fill in later)</span></h2>
+          <div class="mt-6 grid gap-x-8 gap-y-6 md:grid-cols-2">
+            <label class="fld"><span>Which faults were hardest to find?</span><textarea rows="2"></textarea></label>
+            <label class="fld"><span>Which were found easily?</span><textarea rows="2"></textarea></label>
+            <label class="fld"><span>What did students say?</span><textarea rows="2"></textarea></label>
+            <label class="fld"><span>What would you change?</span><textarea rows="2"></textarea></label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Summary panel -->
+    <aside class="lg:block">
+      <div class="sticky top-6 space-y-4">
+        <div class="rounded-md border-2 border-[#101010] p-5">
+          <p class="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-[#595959]">Your plan so far</p>
+          <dl class="space-y-3 text-[15px]">
+            <div class="flex items-baseline justify-between border-b border-[#e3e1dd] pb-2"><dt>Learning objectives</dt><dd class="text-2xl font-bold">0</dd></div>
+            <div class="flex items-baseline justify-between border-b border-[#e3e1dd] pb-2"><dt>Faults</dt><dd class="text-2xl font-bold">0</dd></div>
+            <div class="flex items-baseline justify-between border-b border-[#e3e1dd] pb-2"><dt>Records</dt><dd class="text-2xl font-bold">0</dd></div>
+            <div class="flex items-baseline justify-between"><dt>Assets</dt><dd class="text-2xl font-bold">0</dd></div>
+          </dl>
+          <p class="mt-4 flex items-center gap-2 text-[13px] text-[#595959]"><iconify-icon icon="lucide:save" class="text-[#0077b3]"></iconify-icon>Saved in this browser as you type.</p>
+        </div>
+        <div class="space-y-2.5 rounded-md bg-[#101010] p-4">
+          <button id="dl-word" type="button" class="flex w-full items-center justify-center gap-2 rounded-md bg-[#00afff] px-4 py-3 text-[15px] font-bold text-[#101010] hover:bg-white"><iconify-icon icon="lucide:file-down"></iconify-icon>Download Word document</button>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button id="dl-draft" type="button" class="rounded-md border border-white/30 px-2 py-2.5 text-[13px] font-semibold text-white hover:bg-white/10">Save draft file</button>
+            <button id="open-draft" type="button" class="rounded-md border border-white/30 px-2 py-2.5 text-[13px] font-semibold text-white hover:bg-white/10">Open draft file</button>
+          </div>
+          <button id="dl-data" type="button" class="w-full rounded-md border border-white/30 px-2 py-2.5 text-[13px] font-semibold text-white hover:bg-white/10">Data file for the team</button>
+          <div class="flex justify-between pt-1 text-[13px]"><button id="load-pilot" type="button" class="font-semibold text-[#00afff] underline">Load pilot scenario</button><button id="clear" type="button" class="text-white/70 underline">Clear form</button></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="border-t-[6px] border-[#00afff] bg-[#f2f0f0] py-5 text-sm text-[#595959]">
+    <div class="mx-auto max-w-[1200px] px-6">Planning tool for a food premises audit simulation training project. Unofficial, uses MMU-style colours.</div>
+  </footer>
+</div>
+</body>
+</html>

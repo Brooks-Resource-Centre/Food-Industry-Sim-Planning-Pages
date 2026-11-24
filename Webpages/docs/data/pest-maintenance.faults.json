@@ -1,0 +1,20 @@
+{
+  "scenario": "pest-ingress-and-maintenance-failings",
+  "title": "Pest ingress and maintenance failings",
+  "faults": [
+    { "id": "F-01", "area": "Loading bay", "description": "Rubber seal at the bottom of the door is torn, leaving about a 1 inch gap to the outside.", "hint": "Where could something small get in?", "correctClassification": "major", "clauseRef": "TBC", "linkedRecords": ["building-inspection-record", "pest-control-plan"], "learningNote": "Small gaps are an easy entry route for pests." },
+    { "id": "F-02", "area": "Outside the loading bay", "description": "Heavy weed growth against the building.", "hint": "Look outside the door.", "correctClassification": "minor", "clauseRef": "TBC", "linkedRecords": ["building-inspection-record"], "learningNote": "Plants give pests cover and a way in." },
+    { "id": "F-03", "area": "Warehouse", "description": "Mouse droppings in a dark corner behind a pallet of salt.", "hint": "Check behind long-standing stock.", "correctClassification": "major", "clauseRef": "TBC", "linkedRecords": ["pest-control-visit-report"], "learningNote": "Evidence of pests in the ingredient store. Stock that never moves hides activity. Consider critical if on or near product." },
+    { "id": "F-04", "area": "Warehouse", "description": "Dusty bait station with an out-of-date inspection sticker.", "hint": "Is the pest monitoring up to date?", "correctClassification": "major", "clauseRef": "TBC", "linkedRecords": ["pest-control-visit-report", "bait-station-map"], "learningNote": "The pest monitoring is not being done as planned." },
+    { "id": "F-05", "area": "Warehouse", "description": "Pallet of salt not moved for about six months and out of date.", "hint": "When did this last move?", "correctClassification": "minor", "clauseRef": "TBC", "linkedRecords": ["stock-rotation-record"], "learningNote": "Old stock is not being rotated and gives pests somewhere to hide." },
+    { "id": "F-06", "area": "Debagging room", "description": "Leaking overhead pipe \"repaired\" with duct tape, a bucket catching drips, and drips reaching a surface that touches product.", "hint": "Look up.", "correctClassification": "major", "clauseRef": "TBC", "linkedRecords": ["maintenance-request-log"], "learningNote": "A temporary fix is being used instead of a proper repair, with a risk of contamination." }
+  ],
+  "records": [
+    { "id": "pest-control-visit-report", "title": "Pest control visit report", "location": "Site office", "shows": "Last visit date and list of bait stations" },
+    { "id": "bait-station-map", "title": "Bait station map", "location": "Warehouse wall", "shows": "Where stations are and when each was last checked" },
+    { "id": "maintenance-request-log", "title": "Maintenance request log", "location": "Maintenance office", "shows": "Pipe leak reported, no proper repair scheduled" },
+    { "id": "building-inspection-record", "title": "Building inspection record", "location": "Site office", "shows": "Door seal and weeds were never logged" },
+    { "id": "stock-rotation-record", "title": "Stock rotation record", "location": "Warehouse", "shows": "When the salt pallet arrived" },
+    { "id": "pest-control-plan", "title": "Pest control plan", "location": "Site office", "shows": "What should be checked and how often" }
+  ]
+}

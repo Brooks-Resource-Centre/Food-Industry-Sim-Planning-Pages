@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Guide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Food Premises Audit <span>Sim Scenario Planner</span></a>
+  <nav aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="scenario.html">Plan a Scenario</a>
+    <a href="scenario.html?example=1">Pilot Scenario</a>
+    <a href="resources.html">Resources</a>
+    <a href="team.html" aria-current="page">Team Guide</a>
+  </nav>
+</div></header>
+
+<main><div class="wrap">
+  <h1>Team Guide</h1>
+  <p class="lead">For the development team. Academics only need the <a href="scenario.html">planning form</a>.</p>
+  <p>One Unity project, two builds, many scenarios.</p>
+  <ul>
+    <li><strong>PC browser build:</strong> Unity WebGL (WebGPU optional, experimental). First-person walk, mouse and keyboard, 2D clipboard panel. No WebXR.</li>
+    <li><strong>Standalone VR build:</strong> Android (Quest-class headset). Hand-held clipboard, grab and point.</li>
+    <li><strong>Pilot scenario:</strong> pest ingress and maintenance failings (<a href="scenario.html?example=1">open it in the form</a>).</li>
+  </ul>
+
+  <h2>Workflow for every scenario</h2>
+  <ol>
+    <li><strong>Plan (academic).</strong> The academic completes the <a href="scenario.html">planning form</a> and signs it off before building.</li>
+    <li><strong>Data.</strong> Use the form's <em>Data file for the team</em> button to get the fault JSON. Save it in <code>StreamingAssets</code>. A pilot example is in <a href="data/pest-maintenance.faults.json">data/pest-maintenance.faults.json</a>.</li>
+    <li><strong>Greybox.</strong> Block out the room with primitives. Check scale, sight lines and the walking route in both builds.</li>
+    <li><strong>Art pass.</strong> Swap in real models, textures and decals. Bake lighting.</li>
+    <li><strong>Interactions.</strong> Hook faults to the shared inspect, flag and classify system.</li>
+    <li><strong>Platform test.</strong> Run the browser and Quest builds against the budgets below.</li>
+    <li><strong>Pilot with students.</strong> Record time to find each fault and what was missed. Feed it back into the form (section 11).</li>
+    <li><strong>Review.</strong> Note the real effort and which assets can be reused for the next scenario.</li>
+  </ol>
+
+  <h2>What the team needs</h2>
+  <p class="hint">The academic-facing checklist is on the <a href="resources.html">Resources page</a>. This is the technical side.</p>
+  <ul>
+    <li><strong>People:</strong> Unity developer, 3D / environment artist, someone to look after headsets, builds and web hosting.</li>
+    <li><strong>Hardware:</strong> standalone VR headsets (Quest-class), a development PC with a capable GPU, a typical student PC for browser testing, web hosting for large static files.</li>
+    <li><strong>Software:</strong> Unity LTS with WebGL and Android modules, XR Interaction Toolkit, Blender or equivalent, Git with large-file support.</li>
+    <li><strong>Reusable assets:</strong> building shell, warehouse props, maintenance props, pest props, documents. Characters and equipment come with later scenarios.</li>
+    <li><strong>Risks:</strong> browser build too large or slow, VR frame rate drops, scope creep in the environment.</li>
+  </ul>
+
+  <h2>Suggested Unity layout</h2>
+<pre><code>Assets/
+  Core/            shared, scenario-independent code
+    Audit/         fault model, flagging, classification, scoring
+    Input/         PC and VR input behind one interface (IAuditInput)
+    UI/            clipboard panel (one UI, two presentations)
+    Data/          JSON loader for fault files
+  Scenarios/
+    PestMaintenance/   scene, props, materials, scenario-only scripts
+    &lt;NextScenario&gt;/
+  SharedAssets/    reusable props (pallets, doors, pipes, PPE, signage)
+  Platform/
+    WebGL/         build settings, loading screen
+    Quest/         XR rig, build settings
+  StreamingAssets/ fault JSON files (editable without rebuilding)</code></pre>
+  <p>Rules that keep it cheap to extend:</p>
+  <ul>
+    <li>A scenario is a scene, a fault JSON and some props. Core code is not edited for a new scenario.</li>
+    <li>Anything inspectable carries a <code>FaultTarget</code> component pointing at a fault id from the JSON.</li>
+    <li>Gameplay code talks to <code>IAuditInput</code>, never to the device directly.</li>
+    <li>Keep shared props in <code>SharedAssets</code> so the next scenario starts with a library.</li>
+  </ul>
+
+  <h2>Fault data shape</h2>
+<pre><code>{
+  "scenario": "pest-maintenance",
+  "title": "...",
+  "faults": [
+    {
+      "id": "F-01",
+      "area": "loading bay",
+      "description": "what the student sees",
+      "hint": "...",
+      "correctClassification": "critical | major | minor",
+      "clauseRef": "TBC",
+      "linkedRecords": ["record-id"],
+      "learningNote": "why it matters"
+    }
+  ],
+  "records": [
+    { "id": "record-id", "title": "...", "location": "...", "shows": "..." }
+  ],
+  "assets": [
+    { "name": "...", "type": "Room or building | Object | Damage or marking | Document or record | Person | Sound | Other",
+      "where": "...", "faults": "1, 3", "reference": "Have photo | Have sample | Need help finding | Not needed", "notes": "..." }
+  ]
+}</code></pre>
+  <p>The <code>assets</code> list is the build list. Check it against <code>SharedAssets</code> first and build only what is missing.</p>
+
+  <h2>Platform budgets</h2>
+  <p class="hint">Starting points for planning, not measured limits. Replace them with measured numbers after the pilot.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th scope="col"></th><th scope="col">PC browser (WebGL)</th><th scope="col">Quest (standalone)</th></tr></thead>
+    <tbody>
+      <tr><td>Target frame rate</td><td>30+ fps on a typical university PC</td><td>72 fps minimum</td></tr>
+      <tr><td>Download size</td><td>Aim under about 100 MB initial, stream the rest</td><td>APK size not a blocker</td></tr>
+      <tr><td>Memory</td><td>Well under the roughly 2 GB browser limit</td><td>Mobile GPU budget</td></tr>
+      <tr><td>Lighting</td><td>Baked</td><td>Baked</td></tr>
+      <tr><td>Textures</td><td>Compressed</td><td>Compressed (ASTC)</td></tr>
+      <tr><td>Real-time shadows, post-processing</td><td>Avoid</td><td>Avoid</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Unity version note</h2>
+  <p>Use a Unity 6 LTS release if available to your team. Check the current WebGPU status in its release notes before relying on it. Treat WebGL2 as the safe target.</p>
+
+  <h2>Publishing these pages on GitHub</h2>
+  <p>This site is plain static files in the <code>docs</code> folder. In the GitHub repository go to <em>Settings, Pages</em>, choose the main branch and the <code>/docs</code> folder. The Word export loads one small library from a CDN, so the form needs an internet connection to create the document.</p>
+</div></main>
+
+<footer class="site"><div class="wrap">Planning tool for a food premises audit simulation training project. Unofficial, uses MMU-style colours.</div></footer>
+</body>
+</html>
